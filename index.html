@@ -97,11 +97,18 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 w-full h-full">
-            <!-- Dark gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black z-10"></div>
-            <!-- Parallax Image -->
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2600&auto=format&fit=crop" alt="Kohinoor Hotel Facade" class="hero-bg w-full h-[120%] object-cover object-center absolute top-[-10%]" />
+        <!-- Luxury Animated Aurora Background -->
+        <div class="absolute inset-0 w-full h-full bg-[#0A0A0A] overflow-hidden">
+            <!-- Subtle Grid Overlay -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDBoNDB2MUgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjxwYXRoIGQ9Ik0wIDBoMXY0MEgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvc3ZnPg==')] opacity-30 z-0"></div>
+
+            <!-- Animated Orbs -->
+            <div class="absolute top-[-20%] left-[-10%] w-[70vw] md:w-[50vw] aspect-square rounded-full mix-blend-screen filter blur-[100px] md:blur-[150px] opacity-30 bg-[#D4AF37] animate-blob"></div>
+            <div class="absolute top-[10%] right-[-10%] w-[60vw] md:w-[40vw] aspect-square rounded-full mix-blend-screen filter blur-[100px] md:blur-[150px] opacity-20 bg-[#d32f2f] animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-[-20%] left-[20%] w-[50vw] md:w-[40vw] aspect-square rounded-full mix-blend-screen filter blur-[100px] md:blur-[150px] opacity-10 bg-white animate-blob animation-delay-4000"></div>
+            
+            <!-- Gradient Overlay matching Theme Transition -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/40 to-theme-bg transition-colors duration-500 z-10 pointer-events-none"></div>
         </div>
         
         <div class="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">

@@ -343,45 +343,45 @@
 
             <div class="text-center mb-10">
                 <i class="ph-fill ph-ticket text-4xl text-gold mb-4"></i>
-                <h2 class="text-3xl font-serif text-white mb-2">Reserve Your Stay</h2>
-                <p class="text-gray-400 font-light text-xs md:text-sm">Fill out the details below to instantly send a booking request via WhatsApp.</p>
+                <h2 class="text-3xl font-serif text-theme-text mb-2 transition-colors">Reserve Your Stay</h2>
+                <p class="text-theme-muted font-light text-xs md:text-sm transition-colors">Fill out the details below to instantly send a booking request via WhatsApp.</p>
             </div>
 
             <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 <!-- Name -->
                 <div class="flex flex-col">
-                    <label for="name" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Full Name</label>
-                    <input type="text" id="name" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600" placeholder="John Doe">
+                    <label for="name" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Full Name</label>
+                    <input type="text" id="name" required class="bg-transparent border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors placeholder:text-theme-light" placeholder="John Doe">
                 </div>
                 
                 <!-- Phone -->
                 <div class="flex flex-col">
-                    <label for="phone" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600" placeholder="+91 99999 99999">
+                    <label for="phone" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Phone Number</label>
+                    <input type="tel" id="phone" required class="bg-transparent border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors placeholder:text-theme-light" placeholder="+91 99999 99999">
                 </div>
 
                 <!-- Email -->
                 <div class="flex flex-col md:col-span-2">
-                    <label for="email" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Email Address</label>
-                    <input type="email" id="email" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600" placeholder="contact@example.com">
+                    <label for="email" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Email Address</label>
+                    <input type="email" id="email" required class="bg-transparent border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors placeholder:text-theme-light" placeholder="contact@example.com">
                 </div>
 
                 <!-- C-In -->
                 <div class="flex flex-col">
-                    <label for="checkin" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Check-in Date</label>
-                    <input type="date" id="checkin" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors color-scheme-dark">
+                    <label for="checkin" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Check-in Date</label>
+                    <input type="date" id="checkin" required class="bg-transparent border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors">
                 </div>
 
                 <!-- C-Out -->
                 <div class="flex flex-col">
-                    <label for="checkout" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Check-out Date</label>
-                    <input type="date" id="checkout" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors color-scheme-dark">
+                    <label for="checkout" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Check-out Date</label>
+                    <input type="date" id="checkout" required class="bg-transparent border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors">
                 </div>
                 
                 <!-- Rooms -->
                 <div class="flex flex-col">
-                    <label for="rooms" class="text-xs uppercase tracking-widest text-gray-400 mb-2">No. of Rooms</label>
-                    <select id="rooms" onchange="updateAdults()" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                    <label for="rooms" class="text-xs uppercase tracking-widest text-theme-muted mb-2">No. of Rooms</label>
+                    <select id="rooms" onchange="updateAdults()" class="bg-theme-bg border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
                         <option value="1" selected>1 Room</option>
                         <option value="2">2 Rooms</option>
                         <option value="3">3 Rooms</option>
@@ -391,8 +391,8 @@
 
                 <!-- Adults -->
                 <div class="flex flex-col">
-                    <label for="adults" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Adults</label>
-                    <select id="adults" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                    <label for="adults" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Adults</label>
+                    <select id="adults" class="bg-theme-bg border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
                         <option value="1">1 Adult</option>
                         <option value="2" selected>2 Adults (Max for 1 room)</option>
                         <option value="3">3 Adults (Max for 1 room)</option>
@@ -402,8 +402,8 @@
                 
                 <!-- Children -->
                 <div class="flex flex-col">
-                    <label for="children" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Children</label>
-                    <select id="children" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                    <label for="children" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Children</label>
+                    <select id="children" class="bg-theme-bg border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
                         <option value="0" selected>0 Children</option>
                         <option value="1">1 Child</option>
                         <option value="2">2 Children</option>
@@ -413,8 +413,8 @@
 
                 <!-- Selected Room -->
                 <div class="flex flex-col">
-                    <label for="roomPref" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Room Preference</label>
-                    <select id="roomPref" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                    <label for="roomPref" class="text-xs uppercase tracking-widest text-theme-muted mb-2">Room Preference</label>
+                    <select id="roomPref" class="bg-theme-bg border-b border-theme-border pb-2 text-theme-text focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
                         <option value="Any Room">Any Room</option>
                         <option value="Classic Room">Classic Room</option>
                         <option value="Deluxe Room">Deluxe Room</option>

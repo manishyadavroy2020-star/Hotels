@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kohinoor Hotel & Restaurant | A Legend Since 1956</title>
+    <meta name="description" content="Experience 7-star luxury at Kohinoor Hotel and Restaurant, Benachity, Durgapur. A legend in premium hospitality since 1956.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for zero-build deployments) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'theme-bg': 'var(--color-bg)',
+                        'theme-accent': 'var(--color-accent)',
+                        'theme-text': 'var(--color-text)',
+                        'theme-muted': 'var(--color-text-muted)',
+                        'theme-light': 'var(--color-text-light)',
+                        'theme-border': 'var(--color-border)',
+                        black: '#0B0B0B',
+                        gold: '#D4AF37',
+                        beige: '#F5F5DC',
+                        accent: '#1e1e1e',
+                        'gold-light': '#ebd07d'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+</head>
+<body class="bg-theme-bg text-theme-text font-sans antialiased overflow-x-hidden selection:bg-gold selection:text-black transition-colors duration-500">
+
+    <!-- Sticky Navigation -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-6 px-6 md:px-12 flex justify-between items-center border-b border-white/5 bg-transparent">
+        <a href="#" class="inline-flex items-baseline z-50 group transition-transform hover:scale-105 drop-shadow-[0_4px_8px_rgba(211,47,47,0.3)]">
+            <span class="text-5xl md:text-6xl font-sans font-black text-[#d32f2f] tracking-tighter relative z-10" style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">K</span>
+            <span class="text-3xl md:text-4xl font-sans font-black text-[#d32f2f] tracking-[0.15em] border-b-[6px] md:border-b-[8px] border-[#d32f2f] pb-1 -ml-4 pl-4 md:-ml-6 md:pl-6 relative z-0" style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">OHINOOR</span>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium text-gray-300 items-center">
+            <li><a href="#hero" class="hover:text-gold transition-colors">Home</a></li>
+            <li><a href="#about" class="hover:text-gold transition-colors">Experience</a></li>
+            <li><a href="#rooms" class="hover:text-gold transition-colors">Suites</a></li>
+            <li><a href="#dining" class="hover:text-gold transition-colors">Dining</a></li>
+            <li><button onclick="window.selectRoom('Any Room')" class="bg-gold text-black px-6 py-2 rounded-sm hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-300 font-bold">Book Now</button></li>
+            <li>
+                <button id="themeToggle" class="text-white hover:text-gold transition-colors p-2 text-xl focus:outline-none">
+                    <i class="ph ph-sun"></i>
+                </button>
+            </li>
+        </ul>
+
+        <!-- Mobile Toggle -->
+        <button id="mobile-menu-btn" class="md:hidden text-white z-50 focus:outline-none">
+            <i class="ph ph-list text-3xl"></i>
+        </button>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-theme-bg/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center translate-x-full transition-transform duration-500">
+        <ul class="flex flex-col space-y-8 text-2xl uppercase tracking-widest font-serif text-center w-full">
+            <li><a href="#hero" class="mobile-link text-theme-text hover:text-gold transition-colors block p-2">Home</a></li>
+            <li><a href="#about" class="mobile-link text-theme-text hover:text-gold transition-colors block p-2">Experience</a></li>
+            <li><a href="#rooms" class="mobile-link text-theme-text hover:text-gold transition-colors block p-2">Suites</a></li>
+            <li><a href="#dining" class="mobile-link text-theme-text hover:text-gold transition-colors block p-2">Dining</a></li>
+            <li><button id="mobileThemeToggle" class="mobile-link text-theme-text hover:text-gold transition-colors block p-2 mx-auto"><i class="ph ph-sun text-3xl"></i></button></li>
+            <li><button onclick="window.selectRoom('Any Room')" class="mobile-link text-gold font-bold block p-2 w-full text-center">Book Now</button></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 w-full h-full">
+            <!-- Dark gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black z-10"></div>
+            <!-- Parallax Image -->
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2600&auto=format&fit=crop" alt="Kohinoor Hotel Facade" class="hero-bg w-full h-[120%] object-cover object-center absolute top-[-10%]" />
+        </div>
+        
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
+            <h2 class="hero-reveal text-gold text-sm md:text-base uppercase tracking-[0.3em] mb-4 font-semibold">A Legend Since 1956</h2>
+            <h1 class="hero-reveal text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-6 leading-tight drop-shadow-2xl">
+                The Essence Of <br/> <span class="italic font-light">True Luxury</span>
+            </h1>
+            <p class="hero-reveal text-gray-300 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10">
+                Experience the pinnacle of hospitality at Benachity, Durgapur. Where legacy meets modern elegance.
+            </p>
+            <div class="hero-reveal flex flex-col sm:flex-row gap-6">
+                <button onclick="window.selectRoom('Any Room')" class="px-10 py-4 bg-gold text-black uppercase tracking-widest text-sm font-bold hover:bg-gold-light hover:shadow-[0_0_25px_rgba(212,175,55,0.6)] transition-all duration-300 transform active:scale-95">Book Your Stay</button>
+                <a href="https://wa.me/917029194654?text=Hello%20Kohinoor%20Hotel,%20I%20have%20an%20enquiry!" target="_blank" class="px-10 py-4 border border-white/30 text-white uppercase tracking-widest text-sm font-bold hover:bg-white hover:text-black transition-all duration-300">Enquiry</a>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 z-20 animate-bounce">
+            <a href="#about" class="text-white/50 hover:text-gold transition-colors">
+                <i class="ph ph-caret-down text-3xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-theme-bg relative transition-colors duration-500">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="reveal-left space-y-8">
+                <div class="flex items-center gap-4">
+                    <div class="h-[1px] w-12 bg-gold"></div>
+                    <p class="text-gold uppercase tracking-[0.2em] text-sm">Our Heritage</p>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif text-theme-text leading-tight transition-colors">Define Your Own <br/> Standard of Hospitality.</h2>
+                <p class="text-theme-muted font-light leading-relaxed text-lg transition-colors">
+                    Nestled in the heart of Benachity, Durgapur, the Kohinoor Hotel has been a beacon of luxury standing tall since 1956. We seamlessly blend our deeply rooted traditions with world-class, contemporary comfort to offer our guests an unforgettable experience.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-8 pt-6">
+                    <div class="flex flex-col gap-2">
+                        <i class="ph ph-star text-gold text-4xl mb-2"></i>
+                        <h4 class="text-theme-text font-serif text-xl transition-colors">Iconic Legacy</h4>
+                        <p class="text-sm text-theme-muted transition-colors">Over 60 years of unmatched hospitality excellence.</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <i class="ph ph-crown text-gold text-4xl mb-2"></i>
+                        <h4 class="text-theme-text font-serif text-xl transition-colors">Premium Stay</h4>
+                        <p class="text-sm text-theme-muted transition-colors">Curated experiences designed for royalty.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reveal-right relative">
+                <!-- Image Stack -->
+                <div class="relative w-full aspect-[4/5] rounded-t-full overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1500&auto=format&fit=crop" alt="Hotel Interior" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-2/3 aspect-square border-4 border-theme-bg transition-colors duration-500 z-10 hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop" alt="Luxury Details" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Plans Section -->
+    <section id="rooms" class="py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-theme-accent relative transition-colors duration-500 border-theme-border">
+        <!-- Abstract gradient blob -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal-up">
+                <p class="text-gold uppercase tracking-[0.2em] text-sm mb-4">Accommodation</p>
+                <h2 class="text-4xl md:text-6xl font-serif text-theme-text transition-colors">Exquisite Suites</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10">
+                
+                <!-- Basic Room -->
+                <div class="room-card group relative bg-theme-bg border border-theme-border overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 reveal-up" style="transition-delay: 0ms;">
+                    <div class="overflow-hidden h-64 relative">
+                        <img src="https://images.unsplash.com/photo-1590490359683-658d3d23f972?q=80&w=1000&auto=format&fit=crop" alt="Basic Room" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6">
+                            <h3 class="text-2xl font-serif text-white">Classic Room</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <p class="text-gray-400 font-light text-sm mb-6 flex-1">Simple, clean, and elegant. The perfect resting place for the weary traveler.</p>
+                        
+                        <div class="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
+                            <div>
+                                <span class="text-[10px] text-theme-light uppercase tracking-widest transition-colors block mb-1">Starting From</span>
+                                <span class="text-gold text-2xl font-serif">₹XXX <span class="text-xs text-gray-500 font-sans">/night</span></span>
+                            </div>
+                            <button class="bg-gold text-black px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-gold-light transition-colors" onclick="selectRoom('Classic Room')">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Room (Featured) -->
+                <div class="room-card group relative bg-theme-bg border border-gold shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 lg:-translate-y-6 z-10 reveal-up" style="transition-delay: 150ms;">
+                    <div class="absolute top-4 right-4 bg-gold text-black text-xs font-bold uppercase tracking-widest px-3 py-1 z-20">Featured</div>
+                    <div class="overflow-hidden h-72 relative">
+                        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1000&auto=format&fit=crop" alt="Premium Room" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6">
+                            <h3 class="text-3xl font-serif text-white">Luxury Suite</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <p class="text-gray-400 font-light text-sm mb-6 flex-1">Our finest offering. Sprawling spaces, panoramic views, and opulent decor for an unforgettable experience.</p>
+                        
+                        <div class="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
+                            <div>
+                                <span class="text-[10px] text-theme-light uppercase tracking-widest transition-colors block mb-1">Starting From</span>
+                                <span class="text-gold text-3xl font-serif">₹XXX <span class="text-xs text-gray-500 font-sans">/night</span></span>
+                            </div>
+                            <button class="bg-gold text-black px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-gold-light transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]" onclick="selectRoom('Luxury Suite')">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Standard Room -->
+                <div class="room-card group relative bg-theme-bg border border-theme-border overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 reveal-up" style="transition-delay: 300ms;">
+                    <div class="overflow-hidden h-64 relative">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1000&auto=format&fit=crop" alt="Standard Room" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6">
+                            <h3 class="text-2xl font-serif text-white">Deluxe Room</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <p class="text-gray-400 font-light text-sm mb-6 flex-1">Modern comfort meets classic design. Enjoy superior amenities in a beautifully appointed space.</p>
+                        
+                        <div class="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
+                            <div>
+                                <span class="text-[10px] text-theme-light uppercase tracking-widest transition-colors block mb-1">Starting From</span>
+                                <span class="text-gold text-2xl font-serif">₹XXX <span class="text-xs text-gray-500 font-sans">/night</span></span>
+                            </div>
+                            <button class="bg-gold text-black px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-gold-light transition-colors" onclick="selectRoom('Deluxe Room')">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="py-24 px-6 md:px-12 bg-theme-bg border-theme-border flex">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+            
+            <div class="lg:w-1/3 reveal-left">
+                <p class="text-gold uppercase tracking-[0.2em] text-sm mb-4">Features</p>
+                <h2 class="text-4xl md:text-5xl font-serif text-theme-text mb-6 transition-colors">World Class <br/> Amenities</h2>
+                <p class="text-theme-muted font-light mb-8 transition-colors">Every corner of Kohinoor is designed to elevate your stay. Experience seamless service and modern facilities.</p>
+            </div>
+            
+            <div class="lg:w-2/auto grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10 w-full reveal-right">
+                <div class="group flex flex-col items-center justify-center p-8 border border-theme-border hover:border-gold/30 bg-theme-accent hover:bg-theme-bg transition-all duration-300">
+                    <i class="ph ph-wifi-high text-5xl text-gold mb-4 transform group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="text-theme-text font-serif text-lg text-center transition-colors">Free Wi-Fi</h4>
+                </div>
+                <div class="group flex flex-col items-center justify-center p-8 border border-theme-border hover:border-gold/30 bg-theme-accent hover:bg-theme-bg transition-all duration-300">
+                    <i class="ph ph-wind text-5xl text-gold mb-4 transform group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="text-theme-text font-serif text-lg text-center transition-colors">AC Rooms</h4>
+                </div>
+                <div class="group flex flex-col items-center justify-center p-8 border border-theme-border hover:border-gold/30 bg-theme-accent hover:bg-theme-bg transition-all duration-300">
+                    <i class="ph ph-car-profile text-5xl text-gold mb-4 transform group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="text-theme-text font-serif text-lg text-center transition-colors">Secure Parking</h4>
+                </div>
+                <div class="group flex flex-col items-center justify-center p-8 border border-theme-border hover:border-gold/30 bg-theme-accent hover:bg-theme-bg transition-all duration-300">
+                    <i class="ph ph-bell-ringing text-5xl text-gold mb-4 transform group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="text-theme-text font-serif text-lg text-center transition-colors">Room Service</h4>
+                </div>
+                <div class="group flex flex-col items-center justify-center p-8 border border-theme-border hover:border-gold/30 bg-theme-accent hover:bg-theme-bg transition-all duration-300">
+                    <i class="ph ph-headset text-5xl text-gold mb-4 transform group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="text-theme-text font-serif text-lg text-center transition-colors">24/7 Support</h4>
+                </div>
+                <div class="group flex flex-col items-center justify-center p-8 border border-theme-border hover:border-gold/30 bg-theme-accent hover:bg-theme-bg transition-all duration-300">
+                    <i class="ph ph-coffee text-5xl text-gold mb-4 transform group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="text-theme-text font-serif text-lg text-center transition-colors">Lounge</h4>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section id="dining" class="py-24 md:py-32 bg-theme-bg relative transition-colors duration-500">
+        <div class="max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-0 items-center">
+            
+            <div class="lg:pr-24 reveal-left">
+                <p class="text-gold uppercase tracking-[0.2em] text-sm mb-4">Gastronomy</p>
+                <h2 class="text-4xl md:text-6xl font-serif text-theme-text mb-6 transition-colors">Culinary Excellence</h2>
+                <p class="text-theme-muted font-light mb-10 text-lg transition-colors">Delight your senses at the Kohinoor Restaurant. From authentic local delicacies to masterful Indian, vibrant Chinese, and classic Continental cuisines, our chefs craft every dish to perfection.</p>
+                
+                <ul class="space-y-6 text-theme-text font-serif text-xl transition-colors">
+                    <li class="flex items-center gap-4 border-b border-white/10 pb-4"><span class="text-gold font-sans font-bold text-sm tracking-widest uppercase w-16">01</span> Authentic Indian</li>
+                    <li class="flex items-center gap-4 border-b border-white/10 pb-4"><span class="text-gold font-sans font-bold text-sm tracking-widest uppercase w-16">02</span> Sizzling Chinese</li>
+                    <li class="flex items-center gap-4 border-b border-white/10 pb-4"><span class="text-gold font-sans font-bold text-sm tracking-widest uppercase w-16">03</span> Fine Continental</li>
+                    <li class="flex items-center gap-4 border-b border-white/10 pb-4"><span class="text-gold font-sans font-bold text-sm tracking-widest uppercase w-16">04</span> Local Bengal Cuisine</li>
+                </ul>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 h-[600px] reveal-right">
+                <div class="flex flex-col gap-4 mt-12">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop" class="w-full h-1/2 object-cover transition-all duration-700 cursor-pointer object-center" alt="Restaurant Interior">
+                    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1000&auto=format&fit=crop" class="w-full h-1/2 object-cover transition-all duration-700 cursor-pointer object-center" alt="Indian Chef">
+                </div>
+                <div class="flex flex-col gap-4">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" class="w-full h-2/3 object-cover transition-all duration-700 cursor-pointer object-center" alt="Fine Dining Food">
+                    <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1000&auto=format&fit=crop" class="w-full h-1/3 object-cover transition-all duration-700 cursor-pointer object-center" alt="Wine">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-theme-accent border border-theme-border text-theme-text shadow-[0_20px_60px_rgba(0,0,0,0.8)] w-full max-w-4xl max-h-[90vh] overflow-y-auto relative rounded-sm p-8 md:p-12 transform scale-95 transition-transform duration-300" id="bookingModalContent">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-gold transition-colors">
+                <i class="ph ph-x text-3xl"></i>
+            </button>
+
+            <div class="text-center mb-10">
+                <i class="ph-fill ph-ticket text-4xl text-gold mb-4"></i>
+                <h2 class="text-3xl font-serif text-white mb-2">Reserve Your Stay</h2>
+                <p class="text-gray-400 font-light text-xs md:text-sm">Fill out the details below to instantly send a booking request via WhatsApp.</p>
+            </div>
+
+            <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                <!-- Name -->
+                <div class="flex flex-col">
+                    <label for="name" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Full Name</label>
+                    <input type="text" id="name" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600" placeholder="John Doe">
+                </div>
+                
+                <!-- Phone -->
+                <div class="flex flex-col">
+                    <label for="phone" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Phone Number</label>
+                    <input type="tel" id="phone" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600" placeholder="+91 99999 99999">
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col md:col-span-2">
+                    <label for="email" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Email Address</label>
+                    <input type="email" id="email" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600" placeholder="contact@example.com">
+                </div>
+
+                <!-- C-In -->
+                <div class="flex flex-col">
+                    <label for="checkin" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Check-in Date</label>
+                    <input type="date" id="checkin" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors color-scheme-dark">
+                </div>
+
+                <!-- C-Out -->
+                <div class="flex flex-col">
+                    <label for="checkout" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Check-out Date</label>
+                    <input type="date" id="checkout" required class="bg-transparent border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors color-scheme-dark">
+                </div>
+                
+                <!-- Rooms -->
+                <div class="flex flex-col">
+                    <label for="rooms" class="text-xs uppercase tracking-widest text-gray-400 mb-2">No. of Rooms</label>
+                    <select id="rooms" onchange="updateAdults()" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                        <option value="1" selected>1 Room</option>
+                        <option value="2">2 Rooms</option>
+                        <option value="3">3 Rooms</option>
+                        <option value="4">4+ Rooms</option>
+                    </select>
+                </div>
+
+                <!-- Adults -->
+                <div class="flex flex-col">
+                    <label for="adults" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Adults</label>
+                    <select id="adults" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                        <option value="1">1 Adult</option>
+                        <option value="2" selected>2 Adults (Max for 1 room)</option>
+                        <option value="3">3 Adults (Max for 1 room)</option>
+                        <option value="4">4 Adults</option>
+                    </select>
+                </div>
+                
+                <!-- Children -->
+                <div class="flex flex-col">
+                    <label for="children" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Children</label>
+                    <select id="children" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                        <option value="0" selected>0 Children</option>
+                        <option value="1">1 Child</option>
+                        <option value="2">2 Children</option>
+                        <option value="3">3+ Children</option>
+                    </select>
+                </div>
+
+                <!-- Selected Room -->
+                <div class="flex flex-col">
+                    <label for="roomPref" class="text-xs uppercase tracking-widest text-gray-400 mb-2">Room Preference</label>
+                    <select id="roomPref" class="bg-black border-b border-white/20 pb-2 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                        <option value="Any Room">Any Room</option>
+                        <option value="Classic Room">Classic Room</option>
+                        <option value="Deluxe Room">Deluxe Room</option>
+                        <option value="Luxury Suite">Luxury Suite</option>
+                    </select>
+                </div>
+
+                <!-- Submit -->
+                <div class="md:col-span-2 mt-6 text-center">
+                    <button type="submit" class="w-full md:w-auto px-16 py-4 bg-gold text-black uppercase tracking-widest text-sm font-bold hover:bg-gold-light hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300">
+                        Proceed To Book
+                    </button>
+                    
+                    <div class="mt-6 flex flex-col items-center gap-2 text-center">
+                        <p class="text-gold text-xs font-sans uppercase tracking-widest"><i class="ph-fill ph-warning-circle inline mr-1"></i> ID Proof Mandatory</p>
+                        <p class="text-gray-400 text-xs font-serif italic">Guests must bring a valid Government ID proof at the time of check-in.</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-theme-bg border-theme-border">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal-up">
+            <i class="ph-fill ph-quotes text-5xl text-gold/30 mb-8 mx-auto"></i>
+            <div class="relative min-h-[200px]">
+                <div class="testimonial-slide absolute inset-0 opacity-100 transition-opacity duration-1000">
+                    <div class="flex justify-center gap-1 mb-6 text-gold">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="text-2xl md:text-3xl font-serif text-theme-text mb-6 leading-relaxed transition-colors">"An absolute jewel in Durgapur. The heritage charm mixed with modern luxury is unmatched. The dining experience was spectacular."</p>
+                    <p class="text-sm font-sans uppercase tracking-[0.2em] text-gold">Arjun Mukherjee</p>
+                </div>
+                <div class="testimonial-slide absolute inset-0 opacity-0 transition-opacity duration-1000 pointer-events-none">
+                    <div class="flex justify-center gap-1 mb-6 text-gold">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="text-2xl md:text-3xl font-serif text-theme-text mb-6 leading-relaxed transition-colors">"Stayed in the luxury suite for a business trip. Exemplary service, pristine rooms, and the staff went out of their way to make me comfortable."</p>
+                    <p class="text-sm font-sans uppercase tracking-[0.2em] text-gold">Neha Sharma</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-center gap-4 mt-8">
+                <button class="testi-btn w-3 h-3 rounded-full bg-gold transition-colors focus:outline-none" data-index="0"></button>
+                <button class="testi-btn w-3 h-3 rounded-full bg-white/20 transition-colors focus:outline-none" data-index="1"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact Section -->
+    <footer id="contact" class="bg-theme-accent border-theme-border transition-colors duration-500">
+        <div class="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24 mb-16 reveal-up">
+            
+            <!-- Brand -->
+            <div class="col-span-1 lg:col-span-1">
+                <a href="#" class="inline-flex items-baseline group transition-transform hover:scale-105 drop-shadow-lg mb-6 w-max">
+                    <span class="text-5xl font-sans font-black text-[#d32f2f] tracking-tighter relative z-10">K</span>
+                    <span class="text-3xl font-sans font-black text-[#d32f2f] tracking-[0.15em] border-b-[8px] border-[#d32f2f] pb-1 -ml-6 pl-6 relative z-0">OHINOOR</span>
+                </a>
+                <p class="text-theme-muted text-sm font-light leading-relaxed mb-6 transition-colors">A Legend since 1956. Bringing world-class hospitality and luxury to Benachity, Durgapur.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold hover:text-black transition-all">
+                        <i class="ph ph-instagram-logo text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold hover:text-black transition-all">
+                        <i class="ph ph-facebook-logo text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div>
+                <h4 class="text-theme-text font-serif text-xl mb-6">Navigation</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><a href="#hero" class="hover:text-gold transition-colors">Home</a></li>
+                    <li><a href="#about" class="hover:text-gold transition-colors">Experience</a></li>
+                    <li><a href="#rooms" class="hover:text-gold transition-colors">Rooms & Suites</a></li>
+                    <li><a href="#dining" class="hover:text-gold transition-colors">Restaurant</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="text-theme-text font-serif text-xl mb-6">Contact Us</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <i class="ph ph-map-pin text-gold text-lg mt-1"></i>
+                        <span>Benachity, Durgapur,<br/> West Bengal</span>
+                    </li>
+                    <li class="flex items-center gap-3 mt-4">
+                        <i class="ph ph-phone text-gold text-lg"></i>
+                        <a href="tel:8389981668" class="hover:text-white transition-colors">+91 8389981668</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="ph ph-whatsapp-logo text-gold text-lg"></i>
+                        <a href="https://wa.me/917029194654" class="hover:text-white transition-colors">+91 7029194654</a>
+                    </li>
+                    <li class="mt-8">
+                        <a href="https://wa.me/917029194654?text=Hello%20Kohinoor%20Hotel,%20I%20have%20an%20enquiry!" target="_blank" class="inline-block border border-gold/50 text-gold px-6 py-2 rounded-full font-sans uppercase tracking-widest text-xs hover:bg-gold hover:text-black transition-all duration-300">Enquiry via WhatsApp</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="border-t border-white/10 pt-8 mt-8 text-center px-6">
+            <p class="text-gray-500 text-xs font-light tracking-wider">&copy; 2024 Kohinoor Hotel and Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>

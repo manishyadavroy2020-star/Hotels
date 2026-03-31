@@ -1,0 +1,97 @@
+/* style.css */
+
+/* Base Resets */
+:root {
+    --color-bg: #F8F5F0;
+    --color-accent: #ffffff;
+    --color-text: #1a1a1a;
+    --color-text-muted: #666666;
+    --color-text-light: #888888;
+    --color-border: rgba(0, 0, 0, 0.1);
+}
+
+html.dark {
+    --color-bg: #0B0B0B;
+    --color-accent: #1e1e1e;
+    --color-text: #F5F5DC;
+    --color-text-muted: #9ca3af;
+    --color-text-light: #d1d5db;
+    --color-border: rgba(255, 255, 255, 0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B0B0B;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
+}
+
+/* Optional Custom Date Picker Icon Styling for Webkit */
+::-webkit-calendar-picker-indicator {
+    filter: invert(1) sepia(100%) saturate(300%) hue-rotate(5deg) brightness(90%) contrast(100%);
+    cursor: pointer;
+}
+
+/* Mobile Menu Links Stagger Start state */
+.mobile-link {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Simple Hover Glow Effects for specific utility */
+.hover-gold:hover {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.room-card:hover h3 {
+    color: #D4AF37;
+    transition: color 0.3s ease;
+}
+
+/* Testimonial Active Class */
+.testi-active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.testi-btn-active {
+    background-color: #D4AF37 !important;
+    transform: scale(1.2);
+}
+
+/* Smooth input fill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #0B0B0B inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
